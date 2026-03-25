@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Estudiante;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class EstudianteController extends Controller
 {
+    //  Listar estudiantes con relaciones
     public function index()
     {
-        // Trae a los estudiantes con su carrera y turno
-        return Estudiante::with(['carrera', 'turno'])->get();
+        return response()->json(
+            Estudiante::with(['carrera', 'turno'])->get()
+        );
     }
 
+    //  Crear estudiante
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -25,24 +29,53 @@ class EstudianteController extends Controller
             'activo'     => 'boolean'
         ]);
 
+        //  PASSWORD AUTOMÁTICO
+        $data['password'] = Hash::make('123456');
+
         return Estudiante::create($data);
     }
 
+    //  Mostrar uno
     public function show($id)
     {
-        return Estudiante::with(['carrera', 'turno'])->findOrFail($id);
+        $estudiante = Estudiante::with(['carrera', 'turno'])->findOrFail($id);
+
+        return response()->json($estudiante);
     }
 
+    //  Actualizar
     public function update(Request $request, $id)
     {
         $estudiante = Estudiante::findOrFail($id);
-        $estudiante->update($request->all());
-        return $estudiante;
+
+        $data = $request->validate([
+            'nombres'    => 'sometimes|string',
+            'apellidos'  => 'sometimes|string',
+            'codigo'     => 'sometimes|unique:estudiantes,codigo,' . $id,
+            'email'      => 'sometimes|email|unique:estudiantes,email,' . $id,
+            'password'   => 'nullable|min:6',
+            'carrera_id' => 'sometimes|exists:carreras,id',
+            'turno_id'   => 'sometimes|exists:turnos,id',
+            'activo'     => 'boolean'
+        ]);
+
+        //  Si envían password, encriptar
+        if (isset($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        }
+
+        $estudiante->update($data);
+
+        return response()->json($estudiante);
     }
 
+    // Eliminar
     public function destroy($id)
     {
         Estudiante::destroy($id);
-        return response()->json(['res' => 'Estudiante eliminado']);
+
+        return response()->json([
+            'message' => 'Estudiante eliminado'
+        ]);
     }
 }

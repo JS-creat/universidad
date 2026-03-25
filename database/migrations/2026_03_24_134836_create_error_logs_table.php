@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('error_logs', function (Blueprint $table) {
             $table->id();
-            $table->string('mensaje');           // Texto del error
-            $table->text('stack_trace')->nullable(); // El rastro completo (puede ser nulo)
-            $table->string('url')->nullable();   // Qué URL causó el error
-            $table->string('metodo')->nullable(); // GET, POST, etc.
-            $table->integer('codigo_http')->nullable(); // 500, 404, etc.
+            $table->string('mensaje');          
+            $table->text('stack_trace')->nullable(); 
+            $table->string('url')->nullable();   
+            $table->string('metodo')->nullable(); 
+            $table->integer('codigo_http')->nullable(); 
             $table->timestamps();
         });
     }

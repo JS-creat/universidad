@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('facultades', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');          // Ej: "Ingeniería de Sistemas"
-            $table->string('codigo')->unique(); // Ej: "FIS" — no se puede repetir
+            $table->string('nombre');      
+            $table->string('codigo')->unique(); 
             $table->boolean('activo')->default(true);
             $table->timestamps();
         });

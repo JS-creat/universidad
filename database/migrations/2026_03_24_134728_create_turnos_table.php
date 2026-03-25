@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('turnos', function (Blueprint $table) {
-            $table->id();              // Crea columna "id" autoincremental (PRIMARY KEY)
-            $table->string('nombre'); // Columna texto: "Mañana", "Tarde", "Noche"
-            $table->boolean('activo')->default(true); // true/false, por defecto activo
-            $table->timestamps();      // Crea created_at y updated_at automáticamente
+            $table->id();              
+            $table->string('nombre'); 
+            $table->boolean('activo')->default(true); 
+            $table->timestamps();      
         });
     }
 };

@@ -6,9 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Facultad extends Model
 {
-    protected $fillable = ['nombre', 'codigo', 'activo'];
+    protected $table = 'facultades';
 
-    // Una facultad tiene muchas carreras
+    protected $fillable = [
+        'nombre',
+        'codigo',
+        'activo'
+    ];
+
     public function carreras()
     {
         return $this->hasMany(Carrera::class);

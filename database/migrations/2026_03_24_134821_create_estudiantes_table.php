@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombres');
             $table->string('apellidos');
-            $table->string('codigo')->unique();  // Código de matrícula único
+            $table->string('codigo')->unique();  
             $table->string('email')->unique();
             $table->foreignId('carrera_id')->constrained('carreras');
             $table->foreignId('turno_id')->constrained('turnos');

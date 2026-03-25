@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Turno extends Model
 {
-    protected $fillable = ['nombre', 'activo'];
+    protected $table = 'turnos';
+
+    protected $fillable = [
+        'nombre',
+        'activo'
+    ];
 
     public function estudiantes()
     {

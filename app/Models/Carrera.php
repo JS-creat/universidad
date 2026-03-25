@@ -6,7 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Carrera extends Model
 {
-    protected $fillable = ['nombre', 'facultad_id', 'activo'];
+    protected $table = 'carreras';
+
+    protected $fillable = [
+        'nombre',
+        'facultad_id',
+        'activo'
+    ];
 
     public function facultad()
     {
