@@ -10,7 +10,7 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        // auth() usará el guard 'api' que configuramos en auth.php
+        // auth() usará el guard api que configuramos en auth.php
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Credenciales inválidas'], 401);
         }

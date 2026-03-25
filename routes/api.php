@@ -13,7 +13,7 @@ Route::post('/login', [AuthController::class, 'login']);
 // Rutas protegidas
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/me',      [AuthController::class, 'me']);
+    //Route::get('/me',      [AuthController::class, 'me']);
 
     Route::apiResource('estudiantes', EstudianteController::class);
     Route::apiResource('carreras',    CarreraController::class);
